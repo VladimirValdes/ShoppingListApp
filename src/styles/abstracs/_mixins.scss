@@ -1,0 +1,67 @@
+
+
+
+/*-----BUTTONS-----*/
+
+@mixin google-btn  {
+
+    @content;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+
+    background-color: $bk-secondary;
+    border-radius: 25px;
+    border: 1px solid $color-secondary;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+
+
+    span {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+
+        background-image: url('/assets/icons/google.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+
+    &:visited, &:link{
+        color: $color-primary
+    }
+}
+
+@mixin base-btn($bk, $font-c) {
+
+  
+    @content;
+    padding: 15px;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    background-color: $bk;
+    border-radius: 25px;
+    border: none;
+
+    color: $font-c;
+
+    cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: #EFBC71;
+    }
+}
+
+

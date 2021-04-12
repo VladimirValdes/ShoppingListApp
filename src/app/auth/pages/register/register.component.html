@@ -1,0 +1,91 @@
+
+
+
+<main>
+
+    <div class="auth-content">
+        <section class="sign-up">
+            <span class="sign-up__icon"></span>
+            <h1>Sign Up</h1>
+            <p class="sign-up__desc">Let's create your account</p>
+            <a  href="#"
+                class="google-btn">
+                <span></span>
+                Sign Up with Google
+            </a>
+        </section>
+
+        <section class="form-content">
+
+            <div class="form-division">
+                <span></span>
+                <h4>or Sign up with Email</h4>
+                <span></span>
+            </div>
+    
+            <form class="register-form"
+                  [formGroup]="form"
+                  (ngSubmit)="save()"          
+            >
+                <label class="register-form__label">
+                    Name*
+                    <input class="register-form__input"
+                           type="text"
+                           placeholder="Name"
+                           formControlName="name"
+                           [class.is-invalid]="validateFields('name')">
+                    <small *ngIf="validateFields('name')"
+                            class="alert">
+                        Enter 5 letters
+                    </small>
+                </label>
+
+                <label class="register-form__label">
+                    Email*
+                    <input class="register-form__input"
+                           type="email"
+                           placeholder="mail@example.com"
+                           formControlName="email"
+                           [class.is-invalid]="validateFields('email')">
+
+                    <small *ngIf="validateFields('email')"
+                           class="alert">
+                       Email is invalid
+                   </small>
+                </label>
+
+                <label class="register-form__label">
+                    Password*
+                    <input class="register-form__input"
+                           type="password"
+                           placeholder="Min. 8 character"
+                           formControlName="password"
+                           [class.is-invalid]="validateFields('password')">
+
+                    <small *ngIf="validateFields('password')"
+                           class="alert">
+                       Password is invalid
+                   </small>       
+                </label>
+                <button class="register-form__btn"
+                        [disabled]="form.invalid"
+                        type="submit">
+                        Sign Up
+                </button>
+            </form>
+    
+            <a  class="sign-in"
+                routerLink="/login">
+                Already have an Account? 
+                <span>Sign In</span>
+            </a>
+    
+        </section>
+    </div>
+    <div class="img-content">
+        <img src="/assets/images/shopping-car.svg" alt="image-card">
+    </div>
+  
+  
+</main>
+

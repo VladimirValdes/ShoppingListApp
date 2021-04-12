@@ -1,0 +1,194 @@
+@import './base/palette';
+@import './abstracs/mixins';
+
+
+main {
+  
+    width: 90%;
+    min-width: 288px;
+    max-width: 350px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    // padding: 1rem;
+    
+
+
+    background-color:$bk-secondary;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+
+
+}
+
+/*-----Parents Content ---*/
+
+.auth-content {
+
+    width: 100%;
+    max-width: 350px;
+   
+    padding: 2rem;
+
+
+}
+
+.img-content {
+    display: none;
+   
+}
+
+/*----Section Sign In*/
+.sign-in {
+    width: 100%;
+    height: auto;
+
+    &__icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+
+        background-image: url('/assets/icons/shopping.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    h1 {
+        padding-top: 20px;
+        font-size: 2.4rem;
+        font-weight: 700;
+        line-height: 2.4rem;
+    }
+
+    &__desc {
+        margin-top: 10px;
+
+        font-size: 1.6rem;
+        font-weight: 300;
+
+        color: #8e8aa0;
+    }
+
+  
+    .google-btn {
+        @include google-btn();
+    }
+}
+
+
+/*----Form Content-----*/
+
+.form-content {
+    width: 100%;
+    height: auto;
+
+    text-align: center;
+
+    .form-division {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            display: inline-block;
+
+            width: 20%;
+            //30%
+            height: 1px;
+
+            background-color: $color-secondary;
+        }
+
+        h4 {
+            margin-left: 5px;
+            margin-right: 5px;
+
+            font-size: 1.2rem;
+            font-weight: 300;
+
+            color: #8e8aa0;
+        }
+    
+    }
+
+
+
+    .sign-up {
+        display: inline-block;
+        margin-top: 25px;
+        margin-bottom: 10px;
+
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        text-decoration: none;
+
+
+
+        span {
+            color: $color-secondary
+        }
+
+        &:visited, &:link{
+            color: $color-primary
+        }
+
+    }
+}
+
+
+/*---FORM----*/
+.register-form {
+
+    display: flex;
+    flex-direction: column;
+
+    text-align: start;
+   
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        span {
+            color: $color-secondary
+        }
+
+    }
+
+    &__input {
+        margin-top: 8px;
+        padding: 10px;
+
+        background-color: $bk-secondary;
+        border-radius: 25px;
+        border: 1px solid $color-secondary;
+
+        outline: none;
+    }
+
+
+    &__btn {
+
+        @include base-btn($color-secondary, $bk-secondary);
+
+    }
+
+    .is-invalid {
+        border: 1px solid red;
+    }
+
+    .alert {
+        margin-top: 10px;
+        margin-left: 15px;
+        color: red;
+    }
+
+}

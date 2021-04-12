@@ -1,0 +1,13 @@
+
+@import './base/palette';
+@import './base/reset';
+
+
+html {
+    font-size: 65.5%;
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
+    background-color: $bk-primary;
+}

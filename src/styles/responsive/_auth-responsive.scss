@@ -1,0 +1,41 @@
+@import './base/palette';
+
+@mixin tablet($breakpoint-desktop) {
+    
+    @media screen and(min-width: $breakpoint-desktop) { 
+
+        main {
+              
+            display: flex;
+            flex-direction: row;
+            max-width: 750px;
+        }
+
+        .auth-content {
+            order: 2;
+        }
+
+        .img-content {
+            order: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+
+            background-color: #EFBC71;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+           
+
+            img {
+                width: 350px;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+     
+    }
+
+}
