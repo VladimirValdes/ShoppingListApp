@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 import { AuthService } from '../../services/auth.service';
 
@@ -17,7 +20,8 @@ export class RegisterComponent implements OnInit {
   password: string;
 
   constructor( private fb: FormBuilder,
-               private authService: AuthService) {
+               private authService: AuthService,
+               private router: Router) {
     this.createForm();
     this.name = '';
     this.email = '';
@@ -48,10 +52,30 @@ export class RegisterComponent implements OnInit {
     this.email = this.form.controls.email.value;
     this.password = this.form.controls.password.value;
 
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Loading...'
+    });
 
-    console.log( this.name, this.email, this.password);
+    Swal.showLoading();
+
+
     this.authService.register( this.name, this.email, this.password ).subscribe( resp => {
+
       console.log(resp);
+      Swal.close();
+      this.router.navigateByUrl('/login');
+
+    }, ( err ) => {
+
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Authentication',
+        text: err.error.errors[0].msg
+      });
+
     });
 
     this.form.reset();

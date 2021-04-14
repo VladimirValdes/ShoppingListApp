@@ -11,3 +11,9 @@ html {
 body {
     background-color: $bk-primary;
 }
+
+@media screen and (min-width: 800px ) {
+    html {
+        font-size: 70%;
+    }
+}

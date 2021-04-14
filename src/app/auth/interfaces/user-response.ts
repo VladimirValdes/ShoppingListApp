@@ -1,10 +1,13 @@
-
 export interface UserResponse {
+    user:  User;
+    token: string;
+}
+
+export interface User {
     rol:    string;
     status: boolean;
     google: boolean;
-    _id:    string;
     name:   string;
     email:  string;
-    password: string;
+    uid:    string;
 }

@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { PipesModule } from '../pipes/pipes.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PipesModule,
     RouterModule,
     HttpClientModule
   ]
