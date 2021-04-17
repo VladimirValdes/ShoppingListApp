@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
-
 
 import { AuthService } from '../../services/auth.service';
 
@@ -11,11 +11,15 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   email: string;
   password: string;
+  auth2: any;
+
+  private subscription: Subscription = new Subscription();
+
 
   constructor( private fb: FormBuilder,
                private authService: AuthService,
@@ -26,6 +30,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.renderButton();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   validateFields( filed: string ): boolean | undefined {
@@ -52,22 +61,100 @@ export class LoginComponent implements OnInit {
 
     Swal.showLoading();
 
-    this.authService.login( this.email, this.password).subscribe( resp => {
+    this.subscription.add(
 
-      console.log(resp);
-      Swal.close();
-      this.router.navigateByUrl('/home');
+      this.authService.login( this.email, this.password).subscribe( resp => {
 
-    }, ( err ) => {
+        console.log(resp);
+        Swal.close();
+        this.router.navigateByUrl('/home');
 
-      Swal.fire({
-        icon: 'error',
-        title: 'Error Authentication',
-        text: err.error.msg
-      });
-    });
+      }, ( err ) => {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error Authentication',
+          text: err.error.msg
+        });
+      })
+
+    );
 
     this.form.reset();
+  }
+
+  onSignIn( googleUser: any ) {
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Loading...'
+    });
+
+    Swal.showLoading();
+
+    const idToken = googleUser.getAuthResponse().id_token;
+
+    this.subscription.add(
+      this.authService.googleSingIn( idToken ).subscribe( resp => {
+          console.log(resp);
+          Swal.close();
+
+      }, ( err ) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error Authentication',
+          text: err.error.msg
+        });
+      })
+    );
+
+    console.log(idToken);
+  }
+
+
+  renderButton() {
+    gapi.signin2.render('my-signin2', {
+      scope: 'profile email',
+      width: 300,
+      height: 50,
+      longtitle: true,
+      theme: 'dark',
+    });
+
+  this.startApp();
+
+  }
+
+
+  startApp() {
+    gapi.load('auth2', () => {
+      this.auth2 = gapi.auth2.init({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        client_id: '508845271765-ko80lhodgja5tb7jvpum09mlrut9s0a7.apps.googleusercontent.com',
+      });
+      this.attachSignin(document.getElementById('my-signin2'));
+    });
+  };
+
+
+  attachSignin( element: any) {
+    this.auth2.attachClickHandler(element, {},
+        ( googleUser: any) =>  {
+
+             console.log( googleUser.getBasicProfile().getName() );
+              const idToken = googleUser.getAuthResponse().id_token;
+
+              this.subscription.add(
+                this.authService.googleSingIn( idToken ).subscribe( resp => {
+                            console.log(resp);
+                            this.router.navigateByUrl('/home');
+                })
+              );
+              console.log(idToken);
+        }, (error: any) => {
+          alert(JSON.stringify(error, undefined, 2));
+        });
   }
 
 

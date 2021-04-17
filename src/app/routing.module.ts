@@ -29,7 +29,7 @@ const ROUTES: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'register'
+    redirectTo: 'login'
   }
 
 ];
