@@ -1,0 +1,98 @@
+
+<section class="modal"
+        appCloseModal
+        (active)="modalActiveChanged.emit($event)"
+         [ngClass]="{'modal--show': modalActive}">
+    <div class="modal-container">
+        <div class="titles">
+            <h2>Add a new item</h2>
+
+            <span class="icon"
+                  (click)="closeModal()" >
+                <i class="far fa-window-close"></i>
+            </span>
+        </div>
+    <form class="form"
+          [formGroup]="form"
+          (ngSubmit)="save()">
+                <label class="form__label">
+                    Name*
+                    <input class="form__input"
+                           type="text"
+                           placeholder="enter a name"
+                           formControlName="name"
+                           [class.is-invalid]="validateFields('name')"
+                           >
+                    <small *ngIf="validateFields('name')"
+                            class="alert">
+                        Enter 5 letters
+                    </small>
+                </label>
+
+                <label class="form__label">
+                    Category*
+                    <input  class="form__input"
+                            type="text"
+                            placeholder="Enter a new category"
+                            formControlName="category"
+                            [class.is-invalid]="validateFields('category')">
+                    <small *ngIf="validateFields('category')"
+                            class="alert">
+                            Write a category
+                    </small>
+                </label>
+                <div class="selectbox">
+                    <div class="select " (click)= "optActive = !optActive">
+                        <div class="select__contenido">
+                            <p class="titulo">{{ optionSelect }}</p>
+                        </div>
+                        <i class="fas fa-angle-down select__icon"></i>
+                    </div> 
+                    <!-- options -->
+                     <div class="opcionbox " [ngClass]= "{'active': optActive }">
+                        <a  class="opcion" 
+                        *ngFor="let option of options"
+                        (click)="agregarOpcion( option )">
+                            {{option}}
+                        </a>
+                    </div>
+                </div>
+
+                <label class="form__label">
+                    description (optional)
+                    <textarea
+                        class="form__input" 
+                        name="comentarios" 
+                        rows="5" 
+                        cols="40"
+                        placeholder="Enter a description"
+                        formControlName="description"
+                        value=""></textarea>
+
+                </label>
+
+                <label class="form__label">
+                    Image (optional)
+                    <input class="form__input"
+                           type="text"
+                           placeholder="enter a url"
+                           formControlName="img"
+                           >
+                </label>
+
+               
+
+                <div class="form__options">
+                    <button class="delete"
+                            (click)="closeModal()">
+                            delete
+                    </button>
+                    <button class="add-list" 
+                            type="submit"
+                            [disabled]="form.invalid">
+                            Add to list
+                    </button>
+                </div>
+            </form>
+        </div>
+</section>

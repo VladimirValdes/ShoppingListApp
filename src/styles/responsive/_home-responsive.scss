@@ -1,0 +1,12 @@
+@mixin tablet($breakpoint-tablet) {
+    
+    @media screen and(min-width: $breakpoint-tablet) { 
+        
+        .user-panel {
+            .container {
+                display: grid;
+                grid-template-columns: 1fr 300px;
+            }
+        }
+    }
+}

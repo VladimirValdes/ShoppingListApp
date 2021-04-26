@@ -64,3 +64,62 @@
 }
 
 
+@mixin base-btn2($bk, $font-c) {
+
+  
+    @content;
+    padding: 15px;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    background-color: $bk;
+    border-radius: 5px;
+    border: none;
+
+    color: $font-c;
+
+    cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: #EFBC71;
+    }
+}
+
+@mixin btn-config($bk, $font-c, $p1, $p2, $radius: 5px, $border: none, ) {
+
+  
+    @content;
+    padding: $p1 $p2;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    background-color: $bk;
+    border-radius: $radius;
+    border: $border;
+
+    color: $font-c;
+
+    cursor: pointer;
+
+    // &:disabled {
+    //     cursor: not-allowed;
+    //     background-color: #EFBC71;
+    // }
+}
+
+@mixin checkbox {
+    border: 1px solid red; 
+    clip: rect(0 0 0 0); 
+    -webkit-clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+    height: 1px; 
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}

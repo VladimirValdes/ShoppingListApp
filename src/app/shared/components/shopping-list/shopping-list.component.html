@@ -1,0 +1,79 @@
+<section class="shopping-list">
+    <div class="banner">
+        <span class="banner-icon"></span>
+        <div class="banner-info">
+            <p>Didn't find what you need?</p>
+            <button (click)="showModal()">Add item</button>
+        </div>
+    </div>
+    <div class="shopping-list__titles">
+        <h2>Shopping list</h2>
+        <span><i class="fas fa-pencil-alt"></i></span>
+    </div>
+
+
+    <div class="no-items" *ngIf="productos.length === 0">
+        <p>No Items</p>
+        <img src="/assets/images/shopping-car.svg" alt="image-shopping-car">
+    </div>
+
+   <!-- *ngFor="let producto of productos" -->
+   <!-- <div class="container" *ngIf="productos.length > 0">
+        <div class="shopping-list__items"
+        *ngFor="let producto of productos">
+            <p class="name-category">{{ producto.category}}</p>
+            <div class="product" *ngFor="let prod of producto.products">
+                <div class="container-options">
+                <p class="name-product">{{ prod.name }}</p>
+
+                    <div class="options">
+                        <button class="btn-delete"><i class="far fa-trash-alt"></i></button>
+                        <button class="btn-minus"><i class="fas fa-minus"></i></button>
+                        <button class="btn-amount">3pcs</button>
+                        <button class="btn-plus"><i class="fas fa-plus"></i></button>
+
+                    </div>
+                    <button class="btn-amount">{{ prod.cantidad }}</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div> -->
+
+     <div class="container" *ngIf="productos.length > 0">
+        <div class="shopping-list__items"
+        *ngFor="let producto of productos">
+            <p class="name-category">{{ producto.category}}</p>
+            <div class="product" *ngFor="let prod of producto.products">
+                <div class="container-options">
+               
+                    <label class="c-container name-product">{{ prod.name }}
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+
+                <button class="btn-amount">{{ prod.cantidad }}</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div> 
+
+    <div class="save-list">
+       <div class="save-list__btns" *ngIf="true">
+           <input type="text" placeholder="Enter a name">
+           <button disabled="true">Save</button>
+       </div>
+
+       <div class="complete__options" *ngIf="false">
+            <button class="delete">Cancel</button>
+            <button class="add-list">Complete</button>
+        </div>
+    </div>
+
+   
+
+    
+</section>

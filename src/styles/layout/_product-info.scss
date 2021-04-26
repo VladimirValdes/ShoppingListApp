@@ -1,0 +1,106 @@
+@import 'base/palette';
+@import 'abstracs/mixins';
+
+.product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 380px;
+    height: 100vh;
+    padding: 1.5rem 1rem;
+
+    // border: 1px solid red;
+    // background-color: $color-tertiary;
+
+    // visibility: hidden;
+    // opacity: 0;
+
+    transform: translateX(100%);
+    transition: 0.3s ease-out;
+
+    &--show {
+        // visibility: visible;
+        // opacity: 1;
+        transform: translateX(0);
+    }
+
+    a {
+        
+
+        font-size: 1.5rem;
+        font-weight: 700;
+        
+        text-decoration: none;
+        color: $color-secondary;
+
+        .icon {
+            padding-right: 5px;
+
+        }
+    }
+
+   
+
+
+    &-img {
+
+        width: 100%;
+        height: 220px;
+        margin: 15px 0;
+        
+
+        object-fit: contain;
+        border-radius: 10px;
+
+        
+        box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+    }
+
+    &-label {
+        font-size: 1.5rem;
+        font-weight: 700;
+        
+        color: $font-placehold;
+    }
+
+    &-name {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    
+    &-category {
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    &-desc {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 0;
+
+    }
+
+    &-options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        margin-top: 1rem;
+
+
+        .delete {
+            @include base-btn2($alert-color, $color-tertiary);
+        }
+
+        .add-list {
+            @include base-btn2($complete-color, $color-tertiary);
+
+        }
+    }
+
+   
+}  

@@ -7,12 +7,14 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
+import { HOME_ROUTES } from './routes/home.routes';
 
 const ROUTES: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [ AuthGuard ]
+    canActivate: [ AuthGuard ],
+    children: HOME_ROUTES
   },
   {
     path: 'login',

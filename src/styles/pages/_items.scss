@@ -1,0 +1,136 @@
+@import 'base/palette.scss';
+
+
+.category {
+
+    width: 100%;
+    max-width: 900px;
+    height: 100vh;
+    padding: 2rem 1rem;
+
+    .titles {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 750px;
+        margin: 0 auto;
+        
+        h1 {
+            max-width: 400px;
+            margin-bottom: 30px;
+
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 2.5rem;
+
+
+        }
+
+        span {
+            color: $color-secondary;
+        }
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 275px;
+        min-width: 200px;
+        height: 50px;
+        margin-bottom: 2rem;
+        border-radius: 5px;
+
+
+        box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+        background-color: $color-tertiary;
+        overflow: hidden;
+
+
+
+        .search-icon {
+            padding: 1rem ;
+            font-size: 15px;
+        }
+
+        .fa-search {
+            color: $icon-color;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 0;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: $icon-color;
+            font-weight: 500;
+            font-size: 15px;
+        }
+    }
+
+    .container {
+        width: 100%;
+        max-width: 750px;
+        margin: 0 auto;
+        height: 430px;
+
+
+        overflow-y: scroll;
+        overscroll-behavior-y: contain;
+        scroll-snap-type: y proximity;
+
+    }
+
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
+
+        h3 {
+            width: 100%;
+            margin-bottom: 20px;
+
+            font-size: 1.8rem;
+            font-weight: 500;
+
+        }
+
+        .product {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 185px;
+            height: auto;
+            margin: 0 0.5rem;
+            margin-bottom: 25px;
+
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+
+
+            box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+            background-color: $color-tertiary;
+
+            p {
+                align-self: flex-start;
+                font-size: 1.5rem;
+                font-weight: 500;
+
+                cursor: pointer;
+            }
+
+            span {
+                margin-left: auto;
+                font-size: 1.5rem;
+                color: $font-placehold;
+                
+                cursor: pointer;
+
+            }
+        }
+    }
+}

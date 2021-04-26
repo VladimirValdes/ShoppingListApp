@@ -1,0 +1,66 @@
+<section class="item">
+    <h2>Add a new item</h2>
+    <form class="item-form">
+                <label class="item-form__label">
+                    Name*
+                    <input class="item-form__input"
+                           type="text"
+                           placeholder="enter a name"
+                           >
+                    <!-- <small *ngIf="validateFields('name')"
+                            class="alert">
+                        Enter 5 letters
+                    </small> -->
+                </label>
+
+                <label class="item-form__label">
+                    description (optional)
+                    <textarea
+                        class="item-form__input" 
+                        name="comentarios" 
+                        rows="5" 
+                        cols="40"
+                        placeholder="Enter a description">
+                        
+                    </textarea>
+
+                    <!-- <small *ngIf="validateFields('email')"
+                           class="alert">
+                       Email is invalid
+                   </small> -->
+                </label>
+
+                <label class="item-form__label">
+                    Image (optional)
+                    <input class="item-form__input"
+                           type="text"
+                           placeholder="enter a url"
+                           >
+                    <!-- <small *ngIf="validateFields('name')"
+                            class="alert">
+                        Enter 5 letters
+                    </small> -->
+                </label>
+
+                <!-- <div class="selectbox">
+                    <div class="select " (click)= "optActive = !optActive">
+                        <div class="select__contenido">
+                            <p class="titulo">{{ optionSelect }}</p>
+                        </div>
+                        <i class="fas fa-angle-down select__icon"></i>
+                    </div> 
+                     options 
+                     <div class="opcionbox " [ngClass]= "{'active': optActive }">
+                        <a  class="opcion" 
+                        *ngFor="let option of options"
+                        (click)="agregarOpcion( option )">
+                            {{option}}
+                        </a>
+                    </div>
+                </div> -->
+                <div class="item-form__options">
+                    <button class="delete">delete</button>
+                    <button class="add-list">Add to list</button>
+                </div>
+            </form>
+</section>

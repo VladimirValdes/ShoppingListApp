@@ -1,0 +1,189 @@
+@import 'base/palette';
+@import 'abstracs/mixins';
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    max-width: 100vw;
+    min-width: 300px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    background-color: rgba($color: #000000, $alpha: .5);
+    transform: translateY(-100%);
+    transition: transform .3s;
+
+    &--show {
+        transform: translateY(0);
+    }
+
+    
+
+    
+
+    &-container {
+       
+
+        width: 100%;
+        max-width: 380px;
+        min-width: 288px;
+        padding: 1rem;
+
+
+        background-color: $bk-secondary;
+        box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+
+        border-radius: 5px;
+    }
+
+    .titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+
+
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            color: $color-secondary;
+            cursor: pointer;
+        }
+    }
+    // Formulario
+
+    .form {
+        
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+       
+        // width: 80vw;
+
+        &__label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+    
+        }
+    
+        &__input {
+            margin-top: 8px;
+            padding: 10px;
+    
+            background-color: transparent;
+            border-radius: 5px;
+            border: 2px solid $font-placehold;
+    
+            outline: none;
+
+            &:focus {
+                border: 2px solid $color-secondary;
+            }
+        }
+
+        .selectbox {
+    
+            width: 100%;
+           
+        
+            .select {
+                background-color: transparent;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                transition: .2s ease all;
+                margin-bottom: 5px;
+                padding: 5px 15px;
+                position: relative;
+                border-radius: 5px;
+                border: 2px solid $font-placehold;
+        
+                &__contenido {
+        
+                    .titulo {
+                        color: $icon-color;
+                        font-weight: 500;
+                    }            
+                }
+        
+                
+        
+            }
+        
+            .opcionbox {
+                cursor: pointer;
+                width: inherit;
+                background-color: $bk-secondary;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+                max-height: 400px;
+                padding: 15px 0 5px 0;
+                position: absolute;
+                display: none;
+                border-radius: 5px;
+                border: 2px solid $font-placehold;
+        
+                .opcion {
+                    font-size: 1.3rem;
+                    font-weight: 500;
+                    color: $icon-color;
+                    padding: 0.5rem 0.5rem;
+
+                    &:hover {
+                        background-color: $font-placehold;
+                        border-radius: 5px;
+                    }
+                }
+        
+                &.active{
+                    width: 355px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0.5rem 0.5rem;
+        
+                }
+            }
+        }   
+
+        &__options {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            padding: 1rem;
+    
+    
+            .delete {
+                @include base-btn2($alert-color, $color-tertiary);
+            }
+    
+            .add-list {
+                @include base-btn2($complete-color, $color-tertiary);
+    
+            }
+        }
+
+
+        
+    }
+}

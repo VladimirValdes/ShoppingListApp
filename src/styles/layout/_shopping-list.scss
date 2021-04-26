@@ -1,0 +1,359 @@
+@import 'base/palette';
+@import 'abstracs/mixins';
+
+.shopping-list {
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    height: 100vh;
+    padding: 2rem 1rem 0 1rem;
+
+    background-color: $bk-tertiary;
+
+// titles
+
+    &__titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 25px;
+
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: $icon-color;
+        }
+
+        span {
+            font-size: 2rem;
+            font-weight: 700;
+            color: $icon-color;
+        }
+    }
+
+}
+
+// Banner
+
+.banner {
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    // min-width: 288px;
+    // max-width: 300px;
+    height: 115px;
+
+
+    
+    background-color: $new-item;
+    border-radius: 24px;
+
+    &-icon {
+       
+
+        display: inline-block;
+        width: 85px;
+        height: 115px;
+        margin-bottom: 30px;
+
+        background-image: url('/assets/icons/drink.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        // border: 1px solid red;
+    }
+
+    &-info {
+        // border: 1px solid red;
+        padding: 1rem;
+
+        p {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: $color-tertiary;
+        }
+
+        button {
+
+            @include btn-config($color-tertiary, $icon-color, 10px, 15px);
+          
+        }
+    }
+}
+
+// No items
+
+.no-items {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    p {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    img {
+        width: 100%;
+        height: 225px;
+        object-fit: contain;
+    }
+}
+
+
+// Shopping list ITEMS
+.container {
+    width: 100%;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y proximity;
+    margin-bottom: 140px;
+}
+
+.shopping-list__items {
+    width: 100%;
+   
+
+    .name-category {
+        
+        margin-top: 30px;
+        
+        font-size: 1rem;
+        font-weight: 500;
+        color: $icon-color;
+
+    }
+
+    .product {
+        display: flex;
+        flex-direction: column;
+
+     
+        .container-options {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .options {
+                display: none;
+                width: 150px;
+                height: auto;
+
+                background-color: $bk-secondary;
+                border-radius: 12px;
+
+                &--show {
+                    display: block;
+                }
+            }
+
+            .name-product {
+
+                // margin-top: 25px;
+    
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: $color-primary;
+
+                user-select: none;
+    
+            }
+    
+            
+            .btn-amount {
+                
+                @include btn-config($bk-secondary, $color-secondary, 5px, 15px, 24px);
+                border: 2px solid $color-secondary;
+
+                &--hidden {
+                    display: none
+                }
+
+            }
+
+            .btn-delete {
+                @include btn-config($color-secondary, $bk-secondary, 10px, 10px, 12px);
+
+            }
+
+            .btn-minus {
+                @include btn-config($bk-secondary, $color-secondary, 5px, 8px, 0);
+
+            }
+
+            .btn-plus {
+                @include btn-config($bk-secondary, $color-secondary, 5px, 8px, 0);
+                border-radius: none;
+
+            }
+
+            .c-container {
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                font-size: 22px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+              }
+              
+              /* Hide the browser's default checkbox */
+              .c-container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+              }
+              
+              /* Create a custom checkbox */
+              .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+                border: 2px solid $color-secondary;
+                border-radius: 5px;
+              }
+              
+              /* On mouse-over, add a grey background color */
+              .c-container:hover input ~ .checkmark {
+                background-color: #ccc;
+              }
+              
+              /* When the checkbox is checked, add a blue background */
+              .c-container input:checked ~ .checkmark {
+                background-color: transparent;
+              }
+              
+              /* Create the checkmark/indicator (hidden when not checked) */
+              .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+              }
+              
+              /* Show the checkmark when checked */
+              .c-container input:checked ~ .checkmark:after {
+                display: block;
+              }
+              
+              /* Style the checkmark/indicator */
+              .c-container .checkmark:after {
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid $color-secondary;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+              }
+           
+
+        }
+    }
+}
+
+
+// SAVE LIST
+
+.save-list {
+    position: absolute;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 130px;
+    padding: 1rem;
+
+    background-color: $bk-secondary;
+
+
+    &__btns {
+        display: flex; // Oculto por el momento
+        align-items: center;
+        width: 100%;
+        height: 50px;
+      
+        input {
+            width: 65%;
+            height: 100%;
+            padding: 15px;
+    
+            font-size: 1.5rem;
+
+            background-color: transparent;
+            border-left: 2px solid $font-placehold;
+            border-top: 2px solid $font-placehold;
+            border-bottom: 2px solid $font-placehold;
+            border-right: none;
+
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            outline: none;
+        }
+
+        .active {
+            border-left: 1px solid $color-secondary;
+            border-top: 1px solid $color-secondary;
+            border-bottom: 1px solid $color-secondary;
+            border-right: none;
+        }
+
+        button {
+            width: 35%;
+            height: 100%;
+            @include btn-config($color-secondary, $bk-secondary, 15px, 15px, 0);
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            font-size: 1.5rem;
+
+            &:disabled {
+                background-color: $font-placehold;
+            }
+        }
+    }
+
+
+    .complete__options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+
+
+        .delete {
+            @include base-btn2($alert-color, $color-tertiary);
+        }
+
+        .add-list {
+            @include base-btn2($complete-color, $color-tertiary);
+
+        }
+    }
+}
+

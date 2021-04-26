@@ -1,4 +1,6 @@
 @import 'pages/home';
+@import 'responsive/home-responsive';
+
 .logout-btn {
     padding: 15px;
     background-color: red;
@@ -6,3 +8,5 @@
     border-radius: 5px;
     
 }
+
+@include tablet(800px);

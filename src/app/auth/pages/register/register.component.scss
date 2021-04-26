@@ -1,4 +1,5 @@
 @import 'pages/register';
+@import 'abstracs/validations';
 @import 'responsive/auth-responsive';
 
 @include tablet(800px)

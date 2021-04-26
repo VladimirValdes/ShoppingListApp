@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
+import { ItemsModule } from './items/items.module';
+import { StatisticsModule } from './statistics/statistics.module';
+import { HistoryModule } from './history/history.module';
 
 
 
@@ -19,7 +22,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     RoutingModule,
     AuthModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

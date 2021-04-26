@@ -1,0 +1,19 @@
+<section class="category">
+    <div class="titles">
+        <h1><span>Shoppingify</span> allows you take your shopping list wherever you go</h1>
+        <div class="search-box">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
+            <input type="search" placeholder="search item">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="products" *ngFor="let product of productsList">
+            <h3>{{ product.category }}</h3>
+            <div class="product" *ngFor="let prod of product.products">
+                <p>{{ prod.name }}</p>
+                <span><i class="fas fa-plus"></i></span>
+            </div>
+        </div>
+    </div>
+</section>
