@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 import { ProductsComponent } from './pages/products/products.component';
 
 
@@ -9,7 +14,8 @@ import { ProductsComponent } from './pages/products/products.component';
     ProductsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   exports: [
     ProductsComponent
