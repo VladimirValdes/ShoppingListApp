@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -15,6 +17,7 @@ import { HistoryModule } from '../history/history.module';
 import { ItemsModule } from '../items/items.module';
 import { StatisticsModule } from '../statistics/statistics.module';
 import { DirectivesModule } from '../directives/directives.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -33,7 +36,9 @@ import { DirectivesModule } from '../directives/directives.module';
     StatisticsModule,
     RouterModule,
     DirectivesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    PipesModule
   ],
   exports: [
   ]

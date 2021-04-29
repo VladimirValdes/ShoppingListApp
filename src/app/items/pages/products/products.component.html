@@ -9,7 +9,7 @@
 
     <div class="container">
         <div class="products" *ngFor="let product of productsList">
-            <h3>{{ product.category }}</h3>
+            <h3>{{ product.category | capitalLetters }}</h3>
             <div class="product" *ngFor="let prod of product.products">
                 <p>{{ prod.name }}</p>
                 <span><i class="fas fa-plus"></i></span>

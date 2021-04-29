@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ItemsService {
-  // /search/categoriesUser
+
   constructor( private http: HttpClient,
                private authService: AuthService) { }
 

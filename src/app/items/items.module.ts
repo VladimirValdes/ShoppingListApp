@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ProductsComponent } from './pages/products/products.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -15,7 +16,8 @@ import { ProductsComponent } from './pages/products/products.component';
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ],
   exports: [
     ProductsComponent

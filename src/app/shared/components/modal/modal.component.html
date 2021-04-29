@@ -52,8 +52,8 @@
                      <div class="opcionbox " [ngClass]= "{'active': optActive }">
                         <a  class="opcion" 
                         *ngFor="let option of options"
-                        (click)="agregarOpcion( option )">
-                            {{option}}
+                        (click)="agregarOpcion(option)">
+                            {{option.name | capitalLetters}}
                         </a>
                     </div>
                 </div>
@@ -93,6 +93,7 @@
                             Add to list
                     </button>
                 </div>
+                <!-- <label *ngFor="let option of options">{{option.name}}Soy Label</label> -->
             </form>
         </div>
 </section>

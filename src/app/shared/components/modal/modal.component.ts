@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from '../../services/shared.service';
+import { Category, CategoriesResponse } from '../../interfaces/categories-response';
 
 @Component({
   selector: 'app-modal',
@@ -25,12 +27,14 @@ export class ModalComponent implements OnInit {
 
   optActive = false;
   optionSelect: string;
-  options: string[];
+  options: Category[] = [];
+  // options: string[] = [];
 
-  constructor( private fb: FormBuilder) {
+  constructor( private fb: FormBuilder,
+               private sharedService: SharedService) {
     this.modalActive = false;
     this.optionSelect = 'Filter by Category';
-    this.options = ['Fruit', 'Meat', 'Fish', 'Vegetables'];
+    this.getCategories();
     this.createForm();
   }
 
@@ -41,10 +45,6 @@ export class ModalComponent implements OnInit {
     return this.form.get(filed)?.invalid && this.form.get(filed)?.touched;
   }
 
-  // activeFields( field: string ): boolean | undefined {
-  //   console.log('Ejecutando', this.form.get(field)?.touched);
-  //   return this.form.get(field)?.touched;
-  // }
 
   createForm(): void {
     this.form = this.fb.group({
@@ -75,9 +75,16 @@ export class ModalComponent implements OnInit {
 
   }
 
-  agregarOpcion( opcion: string): void {
-    this.optionSelect = opcion;
+  agregarOpcion( opcion: Category ): void {
+    this.optionSelect = opcion.name;
     this.optActive = false;
-}
+  }
+
+  getCategories(): void {
+
+    this.sharedService.getCategoriesByUser().subscribe( resp => {
+      this.options = resp;
+    });
+  }
 
 }
