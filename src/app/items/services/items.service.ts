@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { ProdxCatResponse, Result } from '../interfaces/prodXcatResponse';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -12,8 +12,12 @@ import { map } from 'rxjs/operators';
 })
 export class ItemsService {
 
+  private refresh: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor( private http: HttpClient,
                private authService: AuthService) { }
+
+
 
 
   getProductsByUser(): Observable<Result[]> {
@@ -29,4 +33,16 @@ export class ItemsService {
       map( ( resp ) => resp.results)
     );
   }
+
+  getRefresh(): Observable<boolean> {
+    return this.refresh.asObservable();
+  }
+
+  setRefresh( value: boolean ): void {
+    this.refresh.next(value);
+  }
+
+
+
+
 }

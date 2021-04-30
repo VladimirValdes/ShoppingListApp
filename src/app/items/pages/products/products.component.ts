@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ItemsService } from '../../services/items.service';
 import { ProdxCatResponse, Result } from '../../interfaces/prodXcatResponse';
 
@@ -10,6 +10,7 @@ import { ProdxCatResponse, Result } from '../../interfaces/prodXcatResponse';
 export class ProductsComponent implements OnInit {
 
   productsList: Result[] = [];
+  // @Output
   // productsList = [
   //   {
   //     category: 'Fruit and Vegetables',
@@ -79,9 +80,26 @@ export class ProductsComponent implements OnInit {
   constructor( private itemService: ItemsService) { }
 
   ngOnInit(): void {
+
+    this.itemService.getRefresh().subscribe( value  => {
+
+      if (value) {
+        this.getItems();
+        console.log('Fuck!! You can do it man!!!');
+      }
+    });
+
+    this.getItems();
+    // this.itemService.getArrayProducts();
+    // console.log(this.itemService.productos);
+    // this.productsList = this.itemService.productos;
+    // console.log(this.productsList);
+  }
+
+  getItems() {
     this.itemService.getProductsByUser().subscribe( resp => {
-        console.log(resp);
-       this.productsList = resp;
+      // console.log(resp);
+     this.productsList = resp;
     });
   }
 

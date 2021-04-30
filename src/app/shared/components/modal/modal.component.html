@@ -35,7 +35,8 @@
                             type="text"
                             placeholder="Enter a new category"
                             formControlName="category"
-                            [class.is-invalid]="validateFields('category')">
+                            [class.is-invalid]="validateFields('category')"
+                            >
                     <small *ngIf="validateFields('category')"
                             class="alert">
                             Write a category
@@ -44,7 +45,7 @@
                 <div class="selectbox">
                     <div class="select " (click)= "optActive = !optActive">
                         <div class="select__contenido">
-                            <p class="titulo">{{ optionSelect }}</p>
+                            <p class="titulo">{{ optionSelect | capitalLetters }}</p>
                         </div>
                         <i class="fas fa-angle-down select__icon"></i>
                     </div> 
