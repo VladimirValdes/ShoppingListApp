@@ -1,6 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ItemsService } from '../../services/items.service';
 import { ProdxCatResponse, Result } from '../../interfaces/prodXcatResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -8,6 +9,8 @@ import { ProdxCatResponse, Result } from '../../interfaces/prodXcatResponse';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+
+  @Output() activeProdInf: EventEmitter<boolean> = new EventEmitter();
 
   productsList: Result[] = [];
   // @Output
@@ -77,7 +80,10 @@ export class ProductsComponent implements OnInit {
   //   }
   // ];
 
-  constructor( private itemService: ItemsService) { }
+  constructor( private itemService: ItemsService,
+               private router: Router) {
+    this.activeProdInf.emit(false);
+  }
 
   ngOnInit(): void {
 
@@ -90,10 +96,7 @@ export class ProductsComponent implements OnInit {
     });
 
     this.getItems();
-    // this.itemService.getArrayProducts();
-    // console.log(this.itemService.productos);
-    // this.productsList = this.itemService.productos;
-    // console.log(this.productsList);
+
   }
 
   getItems() {
@@ -101,6 +104,12 @@ export class ProductsComponent implements OnInit {
       // console.log(resp);
      this.productsList = resp;
     });
+  }
+
+  getProduct( product: any ) {
+    console.log(product);
+    this.itemService.active.next(true);
+    this.itemService.getProductId(product);
   }
 
 }

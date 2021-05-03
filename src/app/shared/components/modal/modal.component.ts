@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { Category, CategoriesResponse } from '../../interfaces/categories-response';
 import { ItemsService } from '../../../items/services/items.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
 
 
   @Input() modalActive: boolean;
@@ -29,8 +30,11 @@ export class ModalComponent implements OnInit {
   optActive = false;
   optionSelect: string;
   categoryId: string;
+  newCategoryId: string;
   options: Category[] = [];
-  // options: string[] = [];
+
+  private subscription: Subscription = new Subscription();
+
 
   constructor( private fb: FormBuilder,
                private sharedService: SharedService,
@@ -38,11 +42,17 @@ export class ModalComponent implements OnInit {
     this.modalActive = false;
     this.optionSelect = 'Filter by Category';
     this.categoryId = '';
+    this.newCategoryId = '';
     this.getCategories();
     this.createForm();
   }
 
+
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   validateFields( filed: string ): boolean | undefined {
@@ -64,18 +74,30 @@ export class ModalComponent implements OnInit {
 
     this.data.name        = this.form.controls.name.value;
     this.data.description = this.form.controls.description.value;
-    this.data.category    = this.form.controls.category.value || this.categoryId;
+    this.newCategoryId    = this.form.controls.category.value;
     this.data.img         = this.form.controls.img.value;
 
+    if (this.newCategoryId) {
+      console.log('I have a value inside me');
+      this.sharedService.createCategory( this.newCategoryId ).subscribe( resp => {
+        console.log(resp);
+        this.data.category = resp.category.cid;
+        this.createProduct( this.data );
+        this.getCategories();
+      });
+
+
+    } else  {
+
+      this.data.category = this.categoryId;
+      this.createProduct( this.data );
+
+
+    }
 
 
 
-    console.log(this.data);
 
-    this.sharedService.createProduct( this.data ).subscribe( resp => {
-    });
-
-    this.itemService.setRefresh(true);
 
     this.form.reset();
 
@@ -100,16 +122,24 @@ export class ModalComponent implements OnInit {
 
   getCategories(): void {
 
-    this.sharedService.getCategoriesByUser().subscribe( resp => {
-      this.options = resp;
-    });
+    this.subscription.add(
+        this.sharedService.getCategoriesByUser().subscribe( resp => {
+        this.options = resp;
+        })
+    );
   }
 
+  createProduct( data: any ): void {
 
-  // createProduct() {
-  //   this.sharedService.createProduct().subscribe( resp => {
-  //     console.log( resp );
-  //   });
-  // }
+    this.subscription.add(
+      this.sharedService.createProduct( data ).subscribe( resp => {})
+    );
+
+    this.itemService.setRefresh(true);
+
+
+
+  }
+
 
 }

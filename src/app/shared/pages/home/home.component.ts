@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
+import { ItemsService } from '../../../items/services/items.service';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,29 @@ export class HomeComponent implements OnInit {
 
   auth2: any;
   actvModal: boolean;
+  infoProduct: boolean;
+  activeList: boolean;
 
   constructor( private authService: AuthService,
+               private itemsService: ItemsService,
                private router: Router) {
                  this.actvModal = false;
+                 this.infoProduct = false;
+                 this.activeList = true;
                }
 
   ngOnInit(): void {
     this.startApp();
+    this.itemsService.active.subscribe( active => {
+        if (active) {
+          this.activeList = false;
+          this.infoProduct = active;
+
+        } else  {
+          this.activeList = true;
+          this.infoProduct = false;
+        }
+    });
   }
 
   startApp() {

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { ProdxCatResponse, Result } from '../interfaces/prodXcatResponse';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -12,7 +12,12 @@ import { map } from 'rxjs/operators';
 })
 export class ItemsService {
 
+  public active: Subject<boolean> = new Subject<boolean>();
   private refresh: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private pid: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+
+
 
   constructor( private http: HttpClient,
                private authService: AuthService) { }
@@ -40,6 +45,14 @@ export class ItemsService {
 
   setRefresh( value: boolean ): void {
     this.refresh.next(value);
+  }
+
+  getProductId( pid: string): void {
+    this.pid.next(pid);
+  }
+
+  getProduct(): Observable< string > {
+    return this.pid.asObservable();
   }
 
 

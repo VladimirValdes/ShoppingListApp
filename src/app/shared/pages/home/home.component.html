@@ -7,19 +7,19 @@
    </aside>
    <div class="container">
      <div class="pages">
-       <router-outlet></router-outlet>
+       <router-outlet>
+       </router-outlet>
      </div>
        
        <div class="container-options">
-               <app-product-info *ngIf="false"></app-product-info>
-               <app-new-item *ngIf="false"></app-new-item>
-               <app-shopping-list *ngIf="true" (activateModal) = "actvModal = $event" ></app-shopping-list>
+               <app-product-info *ngIf="infoProduct"></app-product-info>
+               <app-shopping-list *ngIf="activeList" (activateModal) = "actvModal = $event" ></app-shopping-list>
 
        </div>
        
     </div>
     <app-modal [modalActive] = "actvModal" (modalActiveChanged)="actvModal = $event"></app-modal>
-
+<!-- 
       <button class="logout-btn"
-        (click)="logout()">Logout</button>
+        (click)="logout()">Logout</button> -->
 </main>
