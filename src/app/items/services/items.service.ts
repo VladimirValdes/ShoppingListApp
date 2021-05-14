@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../../auth/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { ProdxCatResponse, Result } from '../interfaces/prodXcatResponse';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { AuthService } from '../../auth/services/auth.service';
+import { ProdxCatResponse, Result } from '../interfaces/prodXcatResponse';
+import { Product, ProductResponse } from '../interfaces/product-response';
 
 
 @Injectable({
@@ -37,6 +39,15 @@ export class ItemsService {
     }).pipe(
       map( ( resp ) => resp.results)
     );
+  }
+
+  getInfoProd( pid: string ): Observable<Product> {
+
+    return this.http.get<ProductResponse>(`${ environment.url }/products/${ pid }`)
+                    .pipe(
+                      map( ( resp ) =>  resp.product )
+                    );
+
   }
 
   getRefresh(): Observable<boolean> {

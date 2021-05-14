@@ -4,6 +4,6 @@ export interface CategoryResponse {
 
 export interface Category {
     name: string;
-    user: string;
+    users: string[];
     cid:  string;
 }

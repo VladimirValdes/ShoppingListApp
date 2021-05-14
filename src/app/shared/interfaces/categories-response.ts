@@ -3,7 +3,7 @@ export interface CategoriesResponse {
 }
 
 export interface Category {
-    name: string;
-    user: string;
-    cid:  string;
+    users: string[];
+    name:  string;
+    cid:   string;
 }

@@ -3,13 +3,14 @@ export interface ProdxCatResponse {
 }
 
 export interface Result {
+    cid:      string;
     category: string;
     products: Product[];
 }
 
 export interface Product {
+    users:    string[];
     name:     string;
     category: string;
-    user:     string;
     pid:      string;
 }

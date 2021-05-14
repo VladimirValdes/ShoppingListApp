@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SharedService } from '../../services/shared.service';
-import { Category, CategoriesResponse } from '../../interfaces/categories-response';
-import { ItemsService } from '../../../items/services/items.service';
 import { Subscription } from 'rxjs';
+import Swal  from 'sweetalert2';
+
+import { ItemsService } from '../../../items/services/items.service';
+import { SharedService } from '../../services/shared.service';
+import { Category } from '../../interfaces/categories-response';
 
 @Component({
   selector: 'app-modal',
@@ -55,6 +57,8 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+
+  /* FORMS METHODS */
   validateFields( filed: string ): boolean | undefined {
     return this.form.get(filed)?.invalid && this.form.get(filed)?.touched;
   }
@@ -95,30 +99,11 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     }
 
-
-
-
-
     this.form.reset();
 
   }
 
-  closeModal(): void {
-    this.modalActiveChanged.emit(false);
-    this.form.reset();
-
-  }
-
-  agregarOpcion( opcion: Category ): void {
-    this.optionSelect = opcion.name;
-    this.categoryId = opcion.cid;
-
-    if (  this.categoryId.length > 0) {
-        this.form.controls.category.disable();
-    }
-    this.optActive = false;
-
-  }
+  /* Services Methods */
 
   getCategories(): void {
 
@@ -132,7 +117,24 @@ export class ModalComponent implements OnInit, OnDestroy {
   createProduct( data: any ): void {
 
     this.subscription.add(
-      this.sharedService.createProduct( data ).subscribe( resp => {})
+      this.sharedService.createProduct( data ).subscribe( resp => {
+        Swal.fire({
+          icon: 'success',
+          title: `${ resp.product.name } was created`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.closeModal();
+      }, ( err ) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong',
+          text: err.error.msg
+        });
+
+        this.closeModal();
+
+      })
     );
 
     this.itemService.setRefresh(true);
@@ -141,5 +143,24 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   }
 
+  /* Others Methods */
+
+  closeModal(): void {
+    this.modalActiveChanged.emit(false);
+    this.optionSelect = 'Filter by Category';
+    this.form.controls.category.enable();
+    this.form.reset();
+  }
+
+  agregarOpcion( opcion: Category ): void {
+    this.optionSelect = opcion.name;
+    this.categoryId = opcion.cid;
+
+    if (  this.categoryId.length > 0) {
+        this.form.controls.category.disable();
+    }
+    this.optActive = false;
+
+  }
 
 }
