@@ -324,7 +324,7 @@
         button {
             width: 35%;
             height: 100%;
-            @include btn-config($color-secondary, $bk-secondary, 15px, 15px, 0);
+            @include btn-config( $font-placehold,  $bk-secondary, 15px, 15px, 0);
             border-top-right-radius: 12px;
             border-bottom-right-radius: 12px;
             font-size: 1.5rem;
@@ -332,6 +332,12 @@
             &:disabled {
                 background-color: $font-placehold;
             }
+        }
+
+        .btn-active {
+
+            background-color: $color-secondary;;
+
         }
     }
 

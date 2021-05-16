@@ -1,10 +1,12 @@
 export interface ListResponse {
+    cid:      string;
     category: string;
     products: Product[];
 }
 
 export interface Product {
-    name: string;
-    id: string;
+    pid:      string;
+    name:     string;
     cantidad: number;
 }
+

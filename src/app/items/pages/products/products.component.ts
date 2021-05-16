@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ItemsService } from '../../services/items.service';
-import { ProdxCatResponse, Result } from '../../interfaces/prodXcatResponse';
+import { Result, Product } from '../../interfaces/prodXcatResponse';
 import { Router } from '@angular/router';
+import { ListService } from '../../../shared/services/list.service';
 
 @Component({
   selector: 'app-products',
@@ -13,74 +14,9 @@ export class ProductsComponent implements OnInit {
   @Output() activeProdInf: EventEmitter<boolean> = new EventEmitter();
 
   productsList: Result[] = [];
-  // @Output
-  // productsList = [
-  //   {
-  //     category: 'Fruit and Vegetables',
-  //     products: [
-  //       {
-  //         name: 'Tomate'
-  //       },
-  //       {
-  //         name: 'Avocado'
-  //       },
-  //       {
-  //         name: 'Apple'
-  //       },
-  //       {
-  //         name: 'Watermelon'
-  //       },
-  //       {
-  //         name: 'PineApple'
-  //       }
-  //     ]
-
-  //   },
-  //   {
-  //     category: 'Meat and Fish',
-  //     products: [
-  //       {
-  //         name: 'chicken'
-  //       },
-  //       {
-  //         name: 'Pork'
-  //       },
-  //       {
-  //         name: 'Salomon'
-  //       },
-  //       {
-  //         name: 'Fish'
-  //       },
-  //       {
-  //         name: 'Meat'
-  //       }
-  //     ]
-
-  //   },
-  //   {
-  //     category: 'Beverages',
-  //     products: [
-  //       {
-  //         name: 'Acocado'
-  //       },
-  //       {
-  //         name: 'Banana'
-  //       },
-  //       {
-  //         name: 'Chicken'
-  //       },
-  //       {
-  //         name: 'Watermelon'
-  //       },
-  //       {
-  //         name: 'Mandarin'
-  //       }
-  //     ]
-
-  //   }
-  // ];
 
   constructor( private itemService: ItemsService,
+               private listService: ListService,
                private router: Router) {
     this.activeProdInf.emit(false);
   }
@@ -110,6 +46,14 @@ export class ProductsComponent implements OnInit {
     console.log(product);
     this.itemService.active.next(true);
     this.itemService.getProductId(product);
+  }
+
+  addProduct( prod: Product, category: string ) {
+    // console.log('FROM ADD PROUCT FUCK 👌');
+    // console.log(prod);
+    // console.log(category);
+
+    this.listService.addProducts( prod, category );
   }
 
 }

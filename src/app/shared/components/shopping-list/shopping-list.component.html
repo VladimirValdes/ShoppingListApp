@@ -18,7 +18,7 @@
     </div>
 
    <!-- *ngFor="let producto of productos" -->
-   <!-- <div class="container" *ngIf="productos.length > 0">
+    <div class="container" *ngIf="productos.length > 0">
         <div class="shopping-list__items"
         *ngFor="let producto of productos">
             <p class="name-category">{{ producto.category}}</p>
@@ -39,9 +39,9 @@
             </div>
         </div>
 
-    </div> -->
+    </div>
 
-     <div class="container" *ngIf="productos.length > 0">
+     <!-- <div class="container" *ngIf="productos.length > 0">
         <div class="shopping-list__items"
         *ngFor="let producto of productos">
             <p class="name-category">{{ producto.category}}</p>
@@ -59,12 +59,16 @@
             </div>
         </div>
 
-    </div> 
+    </div>  -->
 
     <div class="save-list">
-       <div class="save-list__btns" *ngIf="true">
-           <input type="text" placeholder="Enter a name">
-           <button disabled="true">Save</button>
+        <div *ngIf="true"
+              class="save-list__btns"
+              >
+           <input [ngClass]="{'active': productos.length > 0}"
+                  type="text" 
+                  placeholder="Enter a name">
+           <button [ngClass]="{'btn-active': productos.length > 0}">Save</button>
        </div>
 
        <div class="complete__options" *ngIf="false">
