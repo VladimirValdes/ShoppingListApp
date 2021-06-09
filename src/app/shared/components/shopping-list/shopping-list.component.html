@@ -12,28 +12,34 @@
     </div>
 
 
-    <div class="no-items" *ngIf="productos.length === 0">
+    <div class="no-items" *ngIf="list === null ">
         <p>No Items</p>
         <img src="/assets/images/shopping-car.svg" alt="image-shopping-car">
     </div>
 
-   <!-- *ngFor="let producto of productos" -->
-    <div class="container" *ngIf="productos.length > 0">
+    <div class="container" *ngIf=" list !== null ">
         <div class="shopping-list__items"
-        *ngFor="let producto of productos">
-            <p class="name-category">{{ producto.category}}</p>
-            <div class="product" *ngFor="let prod of producto.products">
-                <div class="container-options">
-                <p class="name-product">{{ prod.name }}</p>
+        *ngFor="let item of list.list">
+            <p class="name-category">{{ item.category.name }}</p>
+            <div class="product" >
+                <div class="container-options" 
+                    *ngFor="let product of item.products">
+                    <p class="name-product">{{ product.product.name }}</p>
 
-                    <div class="options">
+                    <div class="options" *ngIf="checkId === product._id">
                         <button class="btn-delete"><i class="far fa-trash-alt"></i></button>
-                        <button class="btn-minus"><i class="fas fa-minus"></i></button>
-                        <button class="btn-amount">3pcs</button>
-                        <button class="btn-plus"><i class="fas fa-plus"></i></button>
+                        <button class="btn-update"
+                                (click)="updateQuantity( product )">
+                            <i class="fas fa-edit"></i>
+                        </button>
+
+                        
 
                     </div>
-                    <button class="btn-amount">{{ prod.cantidad }}</button>
+                    <button *ngIf="checkId !== product._id"
+                            class="btn-amount" 
+                            (click)="controls( product._id )">
+                    {{ product.quantity }}</button>
 
                 </div>
             </div>
@@ -65,10 +71,10 @@
         <div *ngIf="true"
               class="save-list__btns"
               >
-           <input [ngClass]="{'active': productos.length > 0}"
+           <input [ngClass]="{'active': list !== null }"
                   type="text" 
                   placeholder="Enter a name">
-           <button [ngClass]="{'btn-active': productos.length > 0}">Save</button>
+           <button [ngClass]="{'btn-active': list !== null  }">Save</button>
        </div>
 
        <div class="complete__options" *ngIf="false">

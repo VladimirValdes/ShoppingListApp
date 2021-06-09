@@ -147,16 +147,10 @@
             align-items: center;
 
             .options {
-                display: none;
-                width: 150px;
+                width: 125px;
                 height: auto;
-
-                background-color: $bk-secondary;
-                border-radius: 12px;
-
-                &--show {
-                    display: block;
-                }
+                display: flex;
+                justify-content: space-evenly;
             }
 
             .name-product {
@@ -184,20 +178,16 @@
             }
 
             .btn-delete {
-                @include btn-config($color-secondary, $bk-secondary, 10px, 10px, 12px);
-
+                @include btn-config($alert-color, $bk-secondary, 10px, 15px, 10px);
+                font-size: 1.3rem;
             }
 
-            .btn-minus {
-                @include btn-config($bk-secondary, $color-secondary, 5px, 8px, 0);
-
+            .btn-update {
+                @include btn-config($complete-color, $bk-secondary, 10px, 15px, 10px);
+                font-size: 1.3rem;
             }
 
-            .btn-plus {
-                @include btn-config($bk-secondary, $color-secondary, 5px, 8px, 0);
-                border-radius: none;
-
-            }
+           
 
             .c-container {
                 display: block;

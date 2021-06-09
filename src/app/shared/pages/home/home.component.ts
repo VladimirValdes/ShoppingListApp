@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
 import { ItemsService } from '../../../items/services/items.service';
+import { InfoProduct } from '../../interfaces/shopListResponse';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,20 @@ export class HomeComponent implements OnInit {
 
   auth2: any;
   actvModal: boolean;
+  actvModalQ: boolean;
+
   infoProduct: boolean;
   activeList: boolean;
+  product: Partial<InfoProduct> = {};
 
   constructor( private authService: AuthService,
                private itemsService: ItemsService,
                private router: Router) {
                  this.actvModal = false;
+                 this.actvModalQ = false;
                  this.infoProduct = false;
                  this.activeList = true;
+                //  this.infoProduct = {};
                }
 
   ngOnInit(): void {

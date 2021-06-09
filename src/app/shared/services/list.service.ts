@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Product } from 'src/app/items/interfaces/prodXcatResponse';
-import { ListResponse } from '../interfaces/lista-response';
-import Swal  from 'sweetalert2';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+import { AuthService } from '../../auth/services/auth.service';
+import { ListResponse, ShopListResponse, ShopListUser } from '../interfaces/shopListResponse';
+import { map, tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -9,62 +13,40 @@ import Swal  from 'sweetalert2';
 })
 export class ListService {
 
-   listProducts: ListResponse[] = [];
+  public existList: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() {
-    this.loadData();
+
+  constructor( private authService: AuthService,
+               private http: HttpClient) {
   }
 
-  addProducts( product: Product, categoryName: string ) {
+  createList( category: string, product: string ): Observable<string> {
 
-    const { pid, name, category } = product;
+    const headers = new HttpHeaders().set('x-token', this.authService.readToken());
 
-    const prodData = {
-      // eslint-disable-next-line no-underscore-dangle
-      cid: category,
-      category: categoryName,
-      products: [{
-        pid,
-        name,
-        cantidad: 1
-      }]
+    const data = {
+      category,
+      product
     };
 
+    // this.existList.next(true);
 
-    const existCategory = this.listProducts.find( pd => pd.cid === category);
+    return this.http.post<ListResponse>(`${environment.url}/shopList`, data, { headers })
+                    .pipe(
+                      map( resp => resp.id )
+                    );
 
-    if ( existCategory ) {
-
-       const existProduct = existCategory.products.find( p => p.pid === pid );
-
-
-       if (!existProduct) {
-         existCategory.products.push({ pid, name, cantidad: 1 });
-        } else {
-
-          Swal.fire({
-            icon: 'info',
-            title: 'Product already exists',
-          });
-        }
-
-
-    } else  { this.listProducts.push(prodData); }
-
-
-    this.updateData();
-
-    console.log(this.listProducts);
   }
 
-  updateData() {
-    localStorage.setItem('data', JSON.stringify(this.listProducts));
+  getList( ): Observable<ShopListUser> {
+
+    const headers = new HttpHeaders().set('x-token', this.authService.readToken());
+    return this.http.get<ShopListResponse>(`${ environment.url }/shopList/list`, { headers })
+                    .pipe(
+                      map( resp => resp.shopListUser )
+                    );
   }
 
-  loadData() {
-    if ( localStorage.getItem('data') ) {
-      this.listProducts = JSON.parse(localStorage.getItem('data') || '[]');
-    }
-  }
+
 
 }

@@ -13,13 +13,19 @@
        
        <div class="container-options">
                <app-product-info *ngIf="infoProduct"></app-product-info>
-               <app-shopping-list *ngIf="activeList" (activateModal) = "actvModal = $event" ></app-shopping-list>
+               <app-shopping-list *ngIf="activeList" 
+                                  (activateModal) = "actvModal = $event" 
+                                  (activateModalQ) = "actvModalQ = $event"
+                                  (nameProduct) = "product = $event">
+               </app-shopping-list>
 
        </div>
        
     </div>
     <app-modal [modalActive] = "actvModal" (modalActiveChanged)="actvModal = $event"></app-modal>
-
+    <app-modal-quantity [quantityActive] = "actvModalQ"
+                        [productName] = "product" 
+                        (modalActiveChanged)="actvModalQ = $event"></app-modal-quantity>
       <button class="logout-btn"
         (click)="logout()">Logout</button>
 </main>

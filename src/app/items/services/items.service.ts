@@ -22,7 +22,9 @@ export class ItemsService {
 
 
   constructor( private http: HttpClient,
-               private authService: AuthService) { }
+               private authService: AuthService) {
+                 this.active.next(false);
+               }
 
 
 

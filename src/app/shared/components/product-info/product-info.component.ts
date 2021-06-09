@@ -1,13 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
 import { ItemsService } from '../../../items/services/items.service';
 import { Product, ProductObj } from '../../../items/interfaces/product-response';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-info',
   templateUrl: './product-info.component.html',
   styleUrls: ['./product-info.component.scss']
 })
-export class ProductInfoComponent implements OnInit {
+export class ProductInfoComponent implements OnInit, OnDestroy {
 
   @Output() activeInfoProd: EventEmitter<boolean> = new EventEmitter();
 
@@ -15,15 +16,21 @@ export class ProductInfoComponent implements OnInit {
   pid = '';
   show = false;
 
+  private subscription: Subscription = new Subscription();
+
+
   constructor( private itemService: ItemsService) { }
 
   ngOnInit(): void {
 
-    this.itemService.getProduct().subscribe( pid => {
-      this.show = true;
-      this.pid = pid;
-      this.getInfoProduct( this.pid );
-    });
+    this.subscription.add(
+        this.itemService.getProduct().subscribe( pid => {
+          this.show = true;
+          this.pid = pid;
+          this.getInfoProduct( this.pid );
+        })
+    );
+
   }
 
   back() {
@@ -31,11 +38,17 @@ export class ProductInfoComponent implements OnInit {
   }
 
   getInfoProduct( pid: string ) {
-    this.itemService.getInfoProd( pid ).subscribe( resp => {
+    this.subscription.add(
+        this.itemService.getInfoProd( pid ).subscribe( resp => {
 
-      console.log(resp);
-      this.product = resp;
-    });
+          console.log(resp);
+          this.product = resp;
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

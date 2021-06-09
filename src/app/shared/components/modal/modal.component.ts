@@ -51,10 +51,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    console.log('I am active modal two');
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    console.log('Me destrui two');
   }
 
 

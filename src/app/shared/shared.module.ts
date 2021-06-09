@@ -18,6 +18,7 @@ import { ItemsModule } from '../items/items.module';
 import { StatisticsModule } from '../statistics/statistics.module';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { ModalQuantityComponent } from './components/modal-quantity/modal-quantity.component';
 
 
 
@@ -28,7 +29,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ProductInfoComponent,
     ShoppingListComponent,
     NewItemComponent,
-    ModalComponent],
+    ModalComponent,
+    ModalQuantityComponent],
   imports: [
     CommonModule,
     HistoryModule,

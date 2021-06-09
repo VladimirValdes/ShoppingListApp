@@ -1,0 +1,43 @@
+@import 'base/palette';
+@import 'abstracs/mixins';
+
+
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .container-btns {
+
+        .btn-amount {
+                    
+            @include btn-config($bk-secondary, $color-secondary, 5px, 15px, 24px);
+            border: 2px solid $color-secondary;
+        
+            &--hidden {
+                display: none
+            }
+        
+        }
+        
+        .btn-minus {
+            @include btn-config($bk-secondary, $color-secondary, 5px, 8px, 0);
+    
+        }
+    
+        .btn-plus {
+            @include btn-config($bk-secondary, $color-secondary, 5px, 8px, 0);
+            border-radius: none;
+    
+        }
+    }
+    
+}
+
+

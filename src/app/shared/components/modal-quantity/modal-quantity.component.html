@@ -1,0 +1,26 @@
+<section class="modal"
+         appCloseModal
+         [changeQuantity]="true"
+         [product]= "data"
+         (active)="modalActiveChanged.emit($event)"
+         [ngClass]="{'modal--show': quantityActive}"
+         >
+    <div class="modal-container">
+      <div class="product">
+            <h2>{{ productName.name }}</h2>
+
+            <div class="container-btns">
+                  <button class="btn-minus" 
+                         (click)="updateQuantity(0)"
+                         [disabled]="btndisabled">
+                        <i class="fas fa-minus"></i>
+                  </button>
+                  <button class="btn-amount">{{ quantity }} pcs</button>
+                  <button class="btn-plus" (click)="updateQuantity(1)"><i class="fas fa-plus"></i></button>
+            </div>
+      </div>
+     
+        
+    </div>
+  
+</section>
